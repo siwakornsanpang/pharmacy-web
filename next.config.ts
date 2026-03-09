@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "pharmacycouncil.org",
       },
+      {
+        protocol: "https",
+        hostname: "telehealththailand.vercel.app",
+      },
     ],
   },
 };

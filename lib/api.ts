@@ -28,7 +28,7 @@ export async function getWebSettings(): Promise<WebSettings> {
 
     try {
         const res = await fetch(`${API_BASE_URL}/web-settings`, {
-            next: { revalidate: 3600 }, // Cache for 1 hour
+            next: { revalidate: 60 }, // Cache for 1 minute
         });
 
         if (!res.ok) {
