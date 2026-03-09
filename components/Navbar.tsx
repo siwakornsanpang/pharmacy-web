@@ -26,15 +26,12 @@ export default function Navbar() {
             {/* Top Banner (Green) */}
             <div className="bg-[#737300] text-white py-3 px-8 md:px-16 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                    <div className="relative w-14 h-14 bg-white rounded-full p-1 overflow-hidden ring-2 ring-[#a4a800]">
-                        <Image
-                            src="/logo.png" // We'll place the logo here later
-                            alt="Pharmacy Council Logo"
-                            width={56}
-                            height={56}
-                            className="object-contain"
-                        />
-                    </div>
+                    <Image
+                        src="https://pharmacycouncil.org/pharmacycouncil/templates/pharmacycouncil_new/images/smaLogo.jpg"
+                        alt="Pharmacy Council Logo"
+                        width={65}
+                        height={65}
+                    />
                     <div>
                         <h1 className="text-xl md:text-2xl font-semibold tracking-wide leading-tight ThaiFont">
                             สภาเภสัชกรรม
