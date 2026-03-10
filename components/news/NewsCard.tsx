@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Image as ImageIcon } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { News } from '@/lib/api';
 import styles from './NewsCard.module.css';
 
@@ -39,7 +39,7 @@ export default function NewsCard({ news }: NewsCardProps) {
                     />
                 ) : (
                     <div className={styles.placeholder}>
-                        <ImageIcon size={48} strokeWidth={1.5} color="#9ca3af" />
+                        {/* Empty gray placeholder */}
                     </div>
                 )}
                 <span
@@ -56,7 +56,10 @@ export default function NewsCard({ news }: NewsCardProps) {
                     dangerouslySetInnerHTML={{ __html: news.content }}
                 />
                 <div className={styles.footer}>
-                    <span className={styles.date}>{formattedDate}</span>
+                    <span className={styles.date}>
+                        <Calendar size={14} className={styles.dateIcon} />
+                        {formattedDate}
+                    </span>
                 </div>
             </div>
         </Link>

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
 import { News } from '@/lib/api';
 import styles from './FeaturedNews.module.css';
 
@@ -75,14 +75,24 @@ export default function FeaturedNews({ news }: FeaturedNewsProps) {
                         />
                     ) : (
                         <div className={styles.placeholder}>
-                            <ImageIcon size={64} strokeWidth={1} color="#9ca3af" />
+                            {/* Empty gray placeholder */}
                         </div>
                     )}
                 </div>
                 <div className={`${styles.contentSection} ${styles.slideUp}`}>
-                    <span className={styles.badge}>
-                        {categoryLabels[current.category] || current.category}
-                    </span>
+                    <div className={styles.badgeRow}>
+                        <span className={styles.badge}>
+                            {categoryLabels[current.category] || current.category}
+                        </span>
+                        <span className={styles.date}>
+                            <Calendar size={14} className={styles.dateIcon} />
+                            {new Date(current.publishedAt || current.createdAt).toLocaleDateString('th-TH', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                            })}
+                        </span>
+                    </div>
                     <h3 className={styles.title}>{current.title}</h3>
                     <div
                         className={styles.content}
