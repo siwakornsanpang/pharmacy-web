@@ -30,8 +30,8 @@ export default function Navbar() {
                     <Image
                         src="/images/icon.jpg"
                         alt="Pharmacy Council Logo"
-                        width={65}
-                        height={65}
+                        width={40}
+                        height={40}
                         className={styles.logo}
                     />
                     <div>

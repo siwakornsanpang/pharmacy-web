@@ -1,17 +1,321 @@
+.page {
+  min-height: 100vh;
+}
+
+/* === Search Section === */
+.searchSection {
+  padding: 2.5rem 1.5rem;
+  background: #fff;
+}
+
+.searchContainer {
+  max-width: 80%;
+  margin: 0 auto;
+  background: #F9F9F9;
+  border-radius: 24px;
+  padding: 20px;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .searchSection {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* === Shared === */
 .container {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
-.title {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 700;
-    color: var(--primary-olive);
-    margin-bottom: 1.5rem;
+.servicesSection {
+  padding: 2rem 1.5rem;
+  background: #fff;
 }
 
-.description {
-    color: #4b5563;
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.sectionTitle {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.viewAll {
+  font-size: 0.85rem;
+  color: #737300;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.viewAll:hover {
+  opacity: 0.7;
+}
+
+/* ============ บริการประชาชน — Green Gradient Cards ============ */
+.publicGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px; /* ปรับ Gap ให้เท่ากับ pharmaGrid (24px) */
+  width: 100%;
+}
+
+.publicCard {
+  position: relative;
+  /* ปรับสี Gradient ให้นุ่มขึ้นคล้ายรูปต้นฉบับ */
+  background: linear-gradient(202deg, rgba(232, 229, 198, 1) 0%, rgba(115, 115, 0, 1) 100%);
+  border-radius: 24px; /* ปรับความโค้งให้เท่ากับ pharmaCard (24px) */
+  padding: 24px; /* ปรับระยะขอบในให้เท่ากับ pharmaCard (24px) */
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* ดันข้อความไปอยู่ล่างสุด */
+  
+  /* 🔴 บังคับความสูงให้เท่ากับ pharmaCard เป๊ะๆ */
+  height: 290px; 
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.publicCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(115, 115, 0, 0.3);
+}
+
+.publicCardIcon {
+  position: absolute;
+  top: 24px; /* ระยะขอบจากด้านบน */
+  right: 24px; /* ระยะขอบจากด้านขวา */
+  opacity: 0.15; /* ทำให้จางลงเหมือนลายน้ำ (Watermark) */
+  color: #fff;
+  z-index: 0;
+}
+
+/* 🔴 บังคับขยายขนาด SVG (ไอคอน) ให้ใหญ่ขึ้นมากๆ โดยไม่ต้องแก้โค้ด tsx */
+.publicCardIcon svg {
+  width: 130px; 
+  height: 130px;
+}
+
+.publicCardTitle {
+  font-size: 1.5rem; /* ขนาดอักษรประมาณ 24px */
+  font-weight: 700;
+  margin: 0 0 8px 0; /* ระยะห่างระหว่าง Title กับ Desc */
+  line-height: 1.3;
+  z-index: 1; /* ให้อยู่เหนือไอคอนลายน้ำ */
+  white-space: pre-line;
+}
+
+.publicCardDesc {
+  font-size: 1rem; /* ขนาดอักษรประมาณ 16px */
+  font-weight: 400;
+  margin: 0;
+  opacity: 0.95;
+  line-height: 1.5;
+  z-index: 1;
+  white-space: pre-line; /* ทำให้ \n ในไฟล์ tsx เว้นบรรทัดได้จริง */
+}
+
+/* ============ บริการเภสัชกร — Cream/Beige Rounded Cards ============ */
+.pharmaGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* แบ่ง 4 คอลัมน์เท่าๆ กัน */
+  gap: 24px; 
+  width: 100%; /* สั่งให้ Grid กว้างเต็มแค่พื้นที่ของ Container แม่ */
+}
+
+.pharmaCard {
+  background: #ffffff;
+  /* เอา border ออก แล้วใช้เงาที่ฟุ้งขึ้นแทน จะทำให้ดูเนียนตาเหมือนรูปต้นแบบ */
+  border: none; 
+  border-radius: 24px;
+  padding: 24px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
+  box-sizing: border-box; 
+  height: 290px; 
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  /* ปรับเงาให้นุ่มและฟุ้งกระจายรอบๆ การ์ด */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06); 
+}
+
+.pharmaCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.pharmaCardIcon {
+  position: absolute;
+  top: 24px;
+  right: 24px; /* ขยับไปชิดขวาบน */
+  width: 83px; /* ขยายขนาดตาม Figma */
+  height: 83px;
+  border-radius: 50%;
+  /* ใส่ Gradient ตามโค้ด Figma */
+  background: linear-gradient(219deg, rgba(242,241,228,1) 0%, rgba(205,202,165,1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pharmaCardTitle {
+  font-size:2.4rem;
+  font-weight: 700;
+  color: #737300;
+  margin-top: auto; 
+  margin-bottom: 8px; /* เพิ่มระยะห่างก่อนเริ่มคำอธิบาย */
+  
+  /* 🔴 แก้ตรงนี้: เปลี่ยนจาก 60px เป็น 1.2 เพื่อให้ตัวหนังสือบรรทัดบน-ล่างชิดกันสวยงาม */
+  line-height: 1.2; 
+  white-space: pre-line;
+}
+
+.pharmaCardDesc {
+  /* 🔴 แก้ตรงนี้: ลดขนาดลงมาให้ดูเป็นคำอธิบายมากขึ้น (ประมาณ 16px) */
+  font-size: 1rem; 
+  font-weight: 600; /* ปรับเป็น 400 (Regular) จะทำให้อ่านง่ายและไม่แย่งซีนหัวข้อ */
+  color: #4b5563; /* ปรับสีเทาให้อ่อนลงนิดนึงเพื่อให้มีมิติ */
+  margin: 0;
+  line-height: 1.5; /* ใช้ 1.5 เป็นมาตรฐานการอ่านที่ดีที่สุด */
+  white-space: pre-line;
+}
+
+
+.roleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+
+.roleTitleCard {
+  background: linear-gradient(202deg, rgba(232, 229, 198, 1) 0%, rgba(115, 115, 0, 1) 100%);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  align-items: center; /* ให้อยู่กึ่งกลางแนวตั้ง */
+  justify-content: flex-start; /* ข้อความชิดซ้ายตามแบบ */
+  position: relative;
+  overflow: hidden;
+  height: 280px; /* ความสูงมาตรฐานให้เท่ากันทุกการ์ด */
+  box-sizing: border-box;
+}
+
+.roleTitleIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #ffffff;
+  opacity: 0.15;
+}
+
+.roleTitleIcon svg {
+  width: 160px; /* ขยายลายน้ำเครื่องหมายบวกให้ใหญ่ขึ้น */
+  height: 160px;
+}
+
+.roleTitleText {
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  z-index: 1;
+  text-align: left;
+}
+
+.roleCard {
+  background: #f9fafb; /* สีเทาอ่อนมากๆ คล้ายรูปต้นฉบับ */
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  
+  /* 🔴 overflow: hidden สำคัญมาก มันจะช่วยตัดรูปภาพส่วนที่เกินขอบโค้งของการ์ดออกไป */
+  overflow: hidden; 
+  height: 280px; 
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.roleCardContent {
+  position: relative;
+  z-index: 2;
+  
+  /* 🔴 บังคับให้ข้อความมีพื้นที่กว้างสุดแค่ 65% จะได้ไม่ไหลไปทับรูปภาพทางขวา */
+  max-width: 65%; 
+}
+
+.roleCardTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.roleCardDesc {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.roleCardImage {
+  position: absolute;
+  bottom: 0; /* ให้รูปชิดขอบล่างสุด */
+  right: 0;  /* ให้รูปชิดขอบขวาสุด */
+  
+  /* 🔴 ขยายกรอบรูปให้กว้างประมาณครึ่งการ์ด */
+  width: 55%; 
+  height: 85%; 
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  z-index: 1;
+}
+
+/* 🔴 บังคับรูปจาก next/image ให้ขยายพอดีมุมขวาล่างเสมอ */
+.roleCardImage img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  object-position: bottom right; /* พระเอกของเรา ดันรูปชิดขวาล่างเป๊ะๆ */
+}
+
+/* === Responsive for service grids === */
+@media (max-width: 768px) {
+  .publicGrid,
+  .pharmaGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .publicCard,
+  .pharmaCard {
+    min-height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .publicGrid,
+  .pharmaGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
 }

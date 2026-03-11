@@ -104,3 +104,41 @@ export async function getNewsById(id: string): Promise<News | null> {
         return null;
     }
 }
+
+export interface BannerItem {
+    id: string;
+    url: string;
+    originalUrl: string;
+    title: string;
+    clickable: boolean;
+    linkUrl: string;
+    active: boolean;
+    order: number;
+}
+
+export interface HomeContent {
+    banners: BannerItem[];
+    popups: any[];
+}
+
+export async function getHomeContent(): Promise<HomeContent> {
+    if (!API_BASE_URL) {
+        console.error('NEXT_PUBLIC_API_URL is not defined');
+        return { banners: [], popups: [] };
+    }
+
+    try {
+        const res = await fetch(`${API_BASE_URL}/home-content`, {
+            next: { revalidate: 60 },
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch home content: ${res.statusText}`);
+        }
+
+        return res.json();
+    } catch (error) {
+        console.error('Error fetching home content:', error);
+        return { banners: [], popups: [] };
+    }
+}
