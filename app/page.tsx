@@ -1,7 +1,11 @@
-import { getHomeContent, getWebSettings } from "@/lib/api";
+import { getHomeContent, getWebSettings, getNews } from "@/lib/api";
 import Link from "next/link";
 import BannerCarousel from "@/components/home/BannerCarousel";
 import LicenseSearch from "@/components/home/LicenseSearch";
+import HomeStats from "@/components/home/HomeStats";
+import PharmacyCarousel from "@/components/home/PharmacyCarousel";
+import HomeEvents from "@/components/home/HomeEvents";
+import HomeNewsSection from "@/components/home/HomeNewsSection";
 import styles from "./page.module.css";
 import Image from "next/image";
 
@@ -131,10 +135,24 @@ const pharmacistRoles = [
 ];
 
 export default async function Home() {
-  const [homeContent, settings] = await Promise.all([
+  const [homeContent, settings, allNews] = await Promise.all([
     getHomeContent(),
     getWebSettings(),
+    getNews(),
   ]);
+
+  const publishedNews = allNews.filter(n => n.status === 'published');
+  
+  // Get highlights (max 5)
+  let highlights = publishedNews.filter(n => n.isHighlight).slice(0, 5);
+  // If no highlights configured, fallback to latest 3
+  if (highlights.length === 0) {
+    highlights = publishedNews.slice(0, 3);
+  }
+  
+  // Get normal news list (max 6), excluding ones already in highlights
+  const highlightIds = new Set(highlights.map(h => h.id));
+  const newsList = publishedNews.filter(n => !highlightIds.has(n.id)).slice(0, 6);
 
   const activeBanners = (homeContent.banners || [])
     .filter(b => b.active)
@@ -151,6 +169,7 @@ export default async function Home() {
           <LicenseSearch />
         </div>
       </section>
+
 
       {/* === บริการประชาชน === */}
       <section className={styles.servicesSection}>
@@ -231,6 +250,20 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* === 6 สาขาวิชาชีพเภสัชกร === */}
+      <PharmacyCarousel />
+
+
+      
+      {/* === สถิติ === */}
+      <HomeStats />
+
+      {/* === การประชุม === */}
+      <HomeEvents />
+
+      {/* === เรื่องเด่น & ข่าวสาร === */}
+      <HomeNewsSection highlights={highlights} newsList={newsList} />
 
     </div>
   );

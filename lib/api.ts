@@ -142,3 +142,42 @@ export async function getHomeContent(): Promise<HomeContent> {
         return { banners: [], popups: [] };
     }
 }
+
+// ===== Agencies =====
+
+export interface Agency {
+    id: number;
+    order: number;
+    name: string;
+    title: string | null;
+    description: string | null;
+    thumbnailUrl: string | null;
+    originalThumbnailUrl: string | null;
+    logoUrl: string | null;
+    iconUrl: string | null;
+    url: string;
+    category: string;
+    createdAt: string;
+}
+
+export async function getAgencies(): Promise<Agency[]> {
+    if (!API_BASE_URL) {
+        console.error('NEXT_PUBLIC_API_URL is not defined');
+        return [];
+    }
+
+    try {
+        const res = await fetch(`${API_BASE_URL}/agencies`, {
+            next: { revalidate: 60 },
+        });
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch agencies: ${res.statusText}`);
+        }
+
+        return res.json();
+    } catch (error) {
+        console.error('Error fetching agencies:', error);
+        return [];
+    }
+}

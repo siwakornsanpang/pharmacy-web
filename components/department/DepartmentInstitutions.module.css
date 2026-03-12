@@ -1,0 +1,98 @@
+/* === Department Institutions Section === */
+.section {
+  position: relative;
+  background-color: #f7f7f0;
+  padding: 4rem 1.5rem 5rem;
+  overflow: hidden;
+}
+
+/* Background Decoration */
+.bgDecoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bgDecoration svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 2.5rem 0;
+}
+
+/* === 3-Column List === */
+.listGrid {
+  display: flex;
+  gap: 3rem;
+}
+
+.listColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.05rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8A9040;
+  flex-shrink: 0;
+}
+
+/* === Responsive === */
+@media (max-width: 1024px) {
+  .listGrid {
+    flex-wrap: wrap;
+  }
+
+  .listColumn {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+
+  .listGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .listItem {
+    font-size: 0.95rem;
+  }
+}

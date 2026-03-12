@@ -1,24 +1,81 @@
+import { getAgencies } from "@/lib/api";
+import DepartmentStats from "@/components/department/DepartmentStats";
+import DepartmentAgencies from "@/components/department/DepartmentAgencies";
+import DepartmentColleges from "@/components/department/DepartmentColleges";
+import DepartmentNetwork from "@/components/department/DepartmentNetwork";
+import DepartmentInstitutions from "@/components/department/DepartmentInstitutions";
+import DepartmentOther from "@/components/department/DepartmentOther";
 import styles from "./department.module.css";
 
-export default function DepartmentPage() {
+export const dynamic = 'force-dynamic';
+
+export default async function DepartmentPage() {
+    const agencies = await getAgencies();
+
+    // Filter by category
+    const supervisedAgencies = agencies
+        .filter(a => a.category === "supervised")
+        .sort((a, b) => a.order - b.order);
+
+    const collegeAgencies = agencies
+        .filter(a => a.category === "college")
+        .sort((a, b) => a.order - b.order);
+
+    const networkAgencies = agencies
+        .filter(a => a.category === "professional_network")
+        .sort((a, b) => a.order - b.order);
+
+    const institutionAgencies = agencies
+        .filter(a => a.category === "institution")
+        .sort((a, b) => a.order - b.order);
+
+    const otherAgencies = agencies
+        .filter(a => a.category === "other")
+        .sort((a, b) => a.order - b.order);
+
     return (
         <div className={styles.pageWrapper}>
-            {/* Banner Section */}
+            {/* Banner Section (kept as-is) */}
             <header className={styles.banner}>
                 <div className={styles.bannerOverlay}>
                     <div className={styles.bannerContent}>
-                        <h1 className="ThaiFont">หน่วยงาน</h1>
-                        <p className="ThaiFont">หน่วยงานในกำกับของสภาเภสัชกรรม</p>
+                       
                     </div>
                 </div>
             </header>
 
-            <div className={styles.container}>
-                <h2 className={`${styles.title} ThaiFont`}>รายชื่อหน่วยงาน</h2>
-                <div className="text-gray-600 ThaiFont">
-                    ข้อมูลหน่วยงานต่างๆ ภายใต้การดูแลของสภาเภสัชกรรม...
-                </div>
-            </div>
+            {/* Stats Section */}
+            <DepartmentStats agencies={agencies} />
+
+            {/* หน่วยงานในกำกับ */}
+            <DepartmentAgencies
+                title="หน่วยงานในกำกับของสภาเภสัชกรรม"
+                agencies={supervisedAgencies}
+            />
+
+            {/* วิทยาลัย */}
+            <DepartmentColleges
+                title="วิทยาลัยสภาเภสัชกรรมแห่งประเทศไทย"
+                agencies={collegeAgencies}
+            />
+
+            {/* เครือข่ายวิชาชีพ */}
+            <DepartmentNetwork
+                title="เครือข่ายวิชาชีพ"
+                agencies={networkAgencies}
+            />
+
+            {/* สถาบันการศึกษา */}
+            <DepartmentInstitutions
+                title="สถาบันการศึกษา"
+                agencies={institutionAgencies}
+            />
+
+            {/* หน่วยงานอื่น ๆ ที่เกี่ยวข้อง */}
+            <DepartmentOther
+                title={"\u0e2b\u0e19\u0e48\u0e27\u0e22\u0e07\u0e32\u0e19\u0e2d\u0e37\u0e48\u0e19 \u0e46\n\u0e17\u0e35\u0e48\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e02\u0e49\u0e2d\u0e07"}
+                agencies={otherAgencies}
+            />
         </div>
     );
 }
